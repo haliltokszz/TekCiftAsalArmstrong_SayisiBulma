@@ -8,6 +8,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Numerics;
+using System.IO;
 
 namespace TekCift
 {
@@ -115,17 +117,17 @@ namespace TekCift
             }
             return toplam;
         }
-        ulong Carpma(ArrayList sayilar)
+        BigInteger Carpma(ArrayList sayilar)
         {
-            ulong carpim = 1;
+            BigInteger carpim = 1;
             foreach (int z in sayilar)
             {
-                carpim *= Convert.ToUInt64(z);
+                carpim=BigInteger.Multiply(z, carpim);
             }
             return carpim;
         }
 
-        void LogYaz(enİslem islemTuru ,int toplam, ulong carpim, ArrayList sayiListe)
+        void LogYaz(enİslem islemTuru ,int toplam, BigInteger carpim, ArrayList sayiListe)
         {
             if (islemTuru == enİslem.eTekSayi)
             { 
@@ -176,26 +178,109 @@ namespace TekCift
         {
             if (eTur == (int)enİslem.eTekSayi)
             {
-                LogYaz(enİslem.eTekSayi, Toplama(TekSayiBul(ilkSayi, sonSayi)), Carpma(TekSayiBul(ilkSayi, sonSayi)), TekSayiBul(ilkSayi, sonSayi)); 
-            }else if (eTur == (int)enİslem.eCiftSayi)
+                LogYaz(enİslem.eTekSayi, Toplama(TekSayiBul(ilkSayi, sonSayi)), Carpma(TekSayiBul(ilkSayi, sonSayi)), TekSayiBul(ilkSayi, sonSayi));
+                DosyayaYazdir(enİslem.eTekSayi, Toplama(TekSayiBul(ilkSayi, sonSayi)), Carpma(TekSayiBul(ilkSayi, sonSayi)), lstTekSayilar);
+            }
+            else if (eTur == (int)enİslem.eCiftSayi)
             {
                 LogYaz(enİslem.eCiftSayi, Toplama(CiftSayiBul(ilkSayi, sonSayi)), Carpma(CiftSayiBul(ilkSayi, sonSayi)), CiftSayiBul(ilkSayi, sonSayi));
-            }else if (eTur == (int)enİslem.eAsalSayi)
+                DosyayaYazdir(enİslem.eCiftSayi, Toplama(CiftSayiBul(ilkSayi, sonSayi)), Carpma(CiftSayiBul(ilkSayi, sonSayi)), lstCiftSayilar);
+            }
+            else if (eTur == (int)enİslem.eAsalSayi)
             {
                 LogYaz(enİslem.eAsalSayi, Toplama(AsalSayiBul(ilkSayi, sonSayi)), Carpma(AsalSayiBul(ilkSayi, sonSayi)), AsalSayiBul(ilkSayi, sonSayi));
-            }else if (eTur == (int)enİslem.eArmstrongSayi)
+                DosyayaYazdir(enİslem.eAsalSayi, Toplama(AsalSayiBul(ilkSayi, sonSayi)), Carpma(AsalSayiBul(ilkSayi, sonSayi)), lstAsalSayilar);
+            }
+            else if (eTur == (int)enİslem.eArmstrongSayi)
             {
                 LogYaz(enİslem.eArmstrongSayi, Toplama(ArmstrongSayiBul(ilkSayi, sonSayi)), Carpma(ArmstrongSayiBul(ilkSayi, sonSayi)), ArmstrongSayiBul(ilkSayi, sonSayi));
+                DosyayaYazdir(enİslem.eArmstrongSayi, Toplama(ArmstrongSayiBul(ilkSayi, sonSayi)), Carpma(ArmstrongSayiBul(ilkSayi, sonSayi)), lstArmstrongSayilar);
             }
         }
-        
+        private void DosyayaYazdir(enİslem islemTuru, BigInteger toplamaSonuc, BigInteger carpmaSonuc, ListView sayilar)
+        {
+            string dosya_yolu = @"listviewLog.txt";
+            FileStream fsLog = new FileStream(dosya_yolu, FileMode.OpenOrCreate, FileAccess.Write);
+            using (StreamWriter sw = new StreamWriter(fsLog))
+            {
+                if (File.Exists("listviewLog.txt"))
+                {
+                    StreamWriter SW = File.AppendText(Application.StartupPath + fsLog);
+                    sw.WriteLine("-------------------------------------");
+                    DateTime tarih = DateTime.Now;
+                    sw.WriteLine(tarih + " " + islemTuru + "\n");
+                    sw.WriteLine("Sayılar: ");
+                    for (int i = 1; i < sayilar.Items.Count; i++)
+                    {
+                        sw.WriteLine(sayilar.Items[i - 1].Text + ", ");
+                    }
+                    sw.WriteLine("\nToplama Sonucu: " + toplamaSonuc);
+                    sw.WriteLine("\nÇarpma Sonucu: " + carpmaSonuc);
+                    sw.WriteLine("-------------------------------------");
+                    SW.Close();
+                }
+                else
+                {
+                    sw.WriteLine("-------------------------------------");
+                    DateTime simdi = DateTime.Now;
+                    sw.WriteLine(simdi + " " + islemTuru + "\n");
+                    sw.WriteLine("Sayılar: ");
+                    for (int i = 1; i < sayilar.Items.Count; i++)
+                    {
+                        sw.WriteLine(sayilar.Items[i - 1].Text + ", ");
+                    }
+                    sw.WriteLine("\nToplama Sonucu: " + toplamaSonuc);
+                    sw.WriteLine("\nÇarpma Sonucu: " + carpmaSonuc);
+                    sw.WriteLine("-------------------------------------");
+                }
+                
+                
+            }
+        }
+
+       
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            notifyIcon.Icon = new Icon(@"C:\Users\Monster-Halil\Downloads\icon.ico");
+            notifyIcon.Visible = true;
+            notifyIcon.Text = "NotifyIcon Denemesi";
+            notifyIcon.BalloonTipTitle = "Program Çalışıyor";
+            notifyIcon.BalloonTipText = "Program sağ alt köşede konumlandı.";
+            notifyIcon.BalloonTipIcon = ToolTipIcon.Info;
+            notifyIcon.ShowBalloonTip(30000);
+            notifyIcon.MouseDoubleClick += new MouseEventHandler(MyIcon_MouseDoubleClick);
+        }
+
+        private void Form1_Resize(object sender, EventArgs e)
+        {
+            if (FormWindowState.Minimized == WindowState)
+            {
+                Hide();
+                notifyIcon.Visible = true;
+                notifyIcon.Text = "NotifyIcon Denemesi";
+                notifyIcon.BalloonTipTitle = "Program Çalışıyor";
+                notifyIcon.BalloonTipText = "Program sağ alt köşede konumlandı.";
+                notifyIcon.BalloonTipIcon = ToolTipIcon.Info;
+                notifyIcon.ShowBalloonTip(30000);
+                notifyIcon.MouseDoubleClick += new MouseEventHandler(MyIcon_MouseDoubleClick);
+            }
+        }
+
+        void MyIcon_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            Show();
+            notifyIcon.Visible = false;
+        }
 
         private void btnHesapla_Click(object sender, EventArgs e)
         {
+
             int baslangic = Convert.ToInt32(msktxtBaslangic.Text);
             int bitis = Convert.ToInt32(msktxtBitis.Text);
             Islemler(tabIslemler.SelectedIndex, baslangic, bitis);
             
+            EkranHazirla();
         }
 
         private void Form1_Shown(object sender, EventArgs e)

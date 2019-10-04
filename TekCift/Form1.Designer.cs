@@ -28,36 +28,38 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.btnHesapla = new System.Windows.Forms.Button();
             this.grpGirisBilgileri = new System.Windows.Forms.GroupBox();
+            this.msktxtBitis = new System.Windows.Forms.MaskedTextBox();
+            this.msktxtBaslangic = new System.Windows.Forms.MaskedTextBox();
+            this.btnSil = new System.Windows.Forms.Button();
             this.btnİleri = new System.Windows.Forms.Button();
             this.btnGeri = new System.Windows.Forms.Button();
             this.lblBitis = new System.Windows.Forms.Label();
             this.lblBaslangicSayi = new System.Windows.Forms.Label();
             this.tabIslemler = new System.Windows.Forms.TabControl();
             this.tbpgTekSayilar = new System.Windows.Forms.TabPage();
-            this.tbpgCiftSayilar = new System.Windows.Forms.TabPage();
-            this.lstCiftSayilar = new System.Windows.Forms.ListView();
-            this.tbpgAsalSayilar = new System.Windows.Forms.TabPage();
-            this.lstAsalSayilar = new System.Windows.Forms.ListView();
-            this.tbpgArmstrongSayilar = new System.Windows.Forms.TabPage();
-            this.lstArmstrongSayilar = new System.Windows.Forms.ListView();
             this.lstTekSayilar = new System.Windows.Forms.ListView();
-            this.clmCiftListe = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.clmAsalListe = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.clmArmListe = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.clmTekListe = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.clmTekToplam = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.clmTekCarpim = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.btnSil = new System.Windows.Forms.Button();
+            this.tbpgCiftSayilar = new System.Windows.Forms.TabPage();
+            this.lstCiftSayilar = new System.Windows.Forms.ListView();
+            this.clmCiftListe = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.clmCiftToplam = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.clmCiftCarpim = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.tbpgAsalSayilar = new System.Windows.Forms.TabPage();
+            this.lstAsalSayilar = new System.Windows.Forms.ListView();
+            this.clmAsalListe = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.clmAsalToplam = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.clmAsalCarpim = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.tbpgArmstrongSayilar = new System.Windows.Forms.TabPage();
+            this.lstArmstrongSayilar = new System.Windows.Forms.ListView();
+            this.clmArmListe = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.clmArmToplam = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.clmArmCarpim = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.msktxtBaslangic = new System.Windows.Forms.MaskedTextBox();
-            this.msktxtBitis = new System.Windows.Forms.MaskedTextBox();
+            this.notifyIcon = new System.Windows.Forms.NotifyIcon(this.components);
             this.grpGirisBilgileri.SuspendLayout();
             this.tabIslemler.SuspendLayout();
             this.tbpgTekSayilar.SuspendLayout();
@@ -92,6 +94,34 @@
             this.grpGirisBilgileri.TabIndex = 1;
             this.grpGirisBilgileri.TabStop = false;
             this.grpGirisBilgileri.Text = "Giriş Bilgileri";
+            // 
+            // msktxtBitis
+            // 
+            this.msktxtBitis.Location = new System.Drawing.Point(151, 66);
+            this.msktxtBitis.Mask = "00000";
+            this.msktxtBitis.Name = "msktxtBitis";
+            this.msktxtBitis.Size = new System.Drawing.Size(100, 22);
+            this.msktxtBitis.TabIndex = 7;
+            this.msktxtBitis.ValidatingType = typeof(int);
+            // 
+            // msktxtBaslangic
+            // 
+            this.msktxtBaslangic.Location = new System.Drawing.Point(9, 66);
+            this.msktxtBaslangic.Mask = "0000";
+            this.msktxtBaslangic.Name = "msktxtBaslangic";
+            this.msktxtBaslangic.Size = new System.Drawing.Size(100, 22);
+            this.msktxtBaslangic.TabIndex = 1;
+            this.msktxtBaslangic.ValidatingType = typeof(int);
+            // 
+            // btnSil
+            // 
+            this.btnSil.Location = new System.Drawing.Point(450, 60);
+            this.btnSil.Name = "btnSil";
+            this.btnSil.Size = new System.Drawing.Size(86, 28);
+            this.btnSil.TabIndex = 6;
+            this.btnSil.Text = "Sil";
+            this.btnSil.UseVisualStyleBackColor = true;
+            this.btnSil.Click += new System.EventHandler(this.btnSil_Click);
             // 
             // btnİleri
             // 
@@ -154,6 +184,34 @@
             this.tbpgTekSayilar.Text = "Tek Sayılar";
             this.tbpgTekSayilar.UseVisualStyleBackColor = true;
             // 
+            // lstTekSayilar
+            // 
+            this.lstTekSayilar.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.clmTekListe,
+            this.clmTekToplam,
+            this.clmTekCarpim});
+            this.lstTekSayilar.HideSelection = false;
+            this.lstTekSayilar.Location = new System.Drawing.Point(-4, 0);
+            this.lstTekSayilar.Name = "lstTekSayilar";
+            this.lstTekSayilar.Size = new System.Drawing.Size(575, 277);
+            this.lstTekSayilar.TabIndex = 0;
+            this.lstTekSayilar.UseCompatibleStateImageBehavior = false;
+            // 
+            // clmTekListe
+            // 
+            this.clmTekListe.Text = "Liste";
+            this.clmTekListe.Width = 150;
+            // 
+            // clmTekToplam
+            // 
+            this.clmTekToplam.Text = "Toplam";
+            this.clmTekToplam.Width = 150;
+            // 
+            // clmTekCarpim
+            // 
+            this.clmTekCarpim.Text = "Çarpım";
+            this.clmTekCarpim.Width = 150;
+            // 
             // tbpgCiftSayilar
             // 
             this.tbpgCiftSayilar.Controls.Add(this.lstCiftSayilar);
@@ -178,6 +236,21 @@
             this.lstCiftSayilar.TabIndex = 1;
             this.lstCiftSayilar.UseCompatibleStateImageBehavior = false;
             // 
+            // clmCiftListe
+            // 
+            this.clmCiftListe.Text = "Liste";
+            this.clmCiftListe.Width = 150;
+            // 
+            // clmCiftToplam
+            // 
+            this.clmCiftToplam.Text = "Toplam";
+            this.clmCiftToplam.Width = 150;
+            // 
+            // clmCiftCarpim
+            // 
+            this.clmCiftCarpim.Text = "Çarpım";
+            this.clmCiftCarpim.Width = 150;
+            // 
             // tbpgAsalSayilar
             // 
             this.tbpgAsalSayilar.Controls.Add(this.lstAsalSayilar);
@@ -200,6 +273,21 @@
             this.lstAsalSayilar.Size = new System.Drawing.Size(579, 277);
             this.lstAsalSayilar.TabIndex = 1;
             this.lstAsalSayilar.UseCompatibleStateImageBehavior = false;
+            // 
+            // clmAsalListe
+            // 
+            this.clmAsalListe.Text = "Liste";
+            this.clmAsalListe.Width = 150;
+            // 
+            // clmAsalToplam
+            // 
+            this.clmAsalToplam.Text = "Toplam";
+            this.clmAsalToplam.Width = 150;
+            // 
+            // clmAsalCarpim
+            // 
+            this.clmAsalCarpim.Text = "Çarpım";
+            this.clmAsalCarpim.Width = 150;
             // 
             // tbpgArmstrongSayilar
             // 
@@ -224,78 +312,10 @@
             this.lstArmstrongSayilar.TabIndex = 1;
             this.lstArmstrongSayilar.UseCompatibleStateImageBehavior = false;
             // 
-            // lstTekSayilar
-            // 
-            this.lstTekSayilar.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.clmTekListe,
-            this.clmTekToplam,
-            this.clmTekCarpim});
-            this.lstTekSayilar.HideSelection = false;
-            this.lstTekSayilar.Location = new System.Drawing.Point(-4, 0);
-            this.lstTekSayilar.Name = "lstTekSayilar";
-            this.lstTekSayilar.Size = new System.Drawing.Size(575, 277);
-            this.lstTekSayilar.TabIndex = 0;
-            this.lstTekSayilar.UseCompatibleStateImageBehavior = false;
-            // 
-            // clmCiftListe
-            // 
-            this.clmCiftListe.Text = "Liste";
-            this.clmCiftListe.Width = 150;
-            // 
-            // clmAsalListe
-            // 
-            this.clmAsalListe.Text = "Liste";
-            this.clmAsalListe.Width = 150;
-            // 
             // clmArmListe
             // 
             this.clmArmListe.Text = "Liste";
             this.clmArmListe.Width = 150;
-            // 
-            // clmTekListe
-            // 
-            this.clmTekListe.Text = "Liste";
-            this.clmTekListe.Width = 150;
-            // 
-            // clmTekToplam
-            // 
-            this.clmTekToplam.Text = "Toplam";
-            this.clmTekToplam.Width = 150;
-            // 
-            // clmTekCarpim
-            // 
-            this.clmTekCarpim.Text = "Çarpım";
-            this.clmTekCarpim.Width = 150;
-            // 
-            // btnSil
-            // 
-            this.btnSil.Location = new System.Drawing.Point(450, 60);
-            this.btnSil.Name = "btnSil";
-            this.btnSil.Size = new System.Drawing.Size(86, 28);
-            this.btnSil.TabIndex = 6;
-            this.btnSil.Text = "Sil";
-            this.btnSil.UseVisualStyleBackColor = true;
-            this.btnSil.Click += new System.EventHandler(this.btnSil_Click);
-            // 
-            // clmCiftToplam
-            // 
-            this.clmCiftToplam.Text = "Toplam";
-            this.clmCiftToplam.Width = 150;
-            // 
-            // clmCiftCarpim
-            // 
-            this.clmCiftCarpim.Text = "Çarpım";
-            this.clmCiftCarpim.Width = 150;
-            // 
-            // clmAsalToplam
-            // 
-            this.clmAsalToplam.Text = "Toplam";
-            this.clmAsalToplam.Width = 150;
-            // 
-            // clmAsalCarpim
-            // 
-            this.clmAsalCarpim.Text = "Çarpım";
-            this.clmAsalCarpim.Width = 150;
             // 
             // clmArmToplam
             // 
@@ -307,23 +327,10 @@
             this.clmArmCarpim.Text = "Çarpım";
             this.clmArmCarpim.Width = 150;
             // 
-            // msktxtBaslangic
+            // notifyIcon
             // 
-            this.msktxtBaslangic.Location = new System.Drawing.Point(9, 66);
-            this.msktxtBaslangic.Mask = "0000";
-            this.msktxtBaslangic.Name = "msktxtBaslangic";
-            this.msktxtBaslangic.Size = new System.Drawing.Size(100, 22);
-            this.msktxtBaslangic.TabIndex = 1;
-            this.msktxtBaslangic.ValidatingType = typeof(int);
-            // 
-            // msktxtBitis
-            // 
-            this.msktxtBitis.Location = new System.Drawing.Point(151, 66);
-            this.msktxtBitis.Mask = "00000";
-            this.msktxtBitis.Name = "msktxtBitis";
-            this.msktxtBitis.Size = new System.Drawing.Size(100, 22);
-            this.msktxtBitis.TabIndex = 7;
-            this.msktxtBitis.ValidatingType = typeof(int);
+            this.notifyIcon.Text = "NotifyIcon";
+            this.notifyIcon.Visible = true;
             // 
             // Form1
             // 
@@ -378,6 +385,7 @@
         private System.Windows.Forms.ColumnHeader clmArmCarpim;
         private System.Windows.Forms.MaskedTextBox msktxtBaslangic;
         private System.Windows.Forms.MaskedTextBox msktxtBitis;
+        private System.Windows.Forms.NotifyIcon notifyIcon;
     }
 }
 
