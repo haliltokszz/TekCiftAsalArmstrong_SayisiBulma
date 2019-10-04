@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Configuration;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -15,6 +16,8 @@ namespace TekCift
 {
     public partial class Form1 : Form
     {
+        public object ConfigurationSaveMode { get; private set; }
+
         public Form1()
         {
             InitializeComponent();
@@ -200,57 +203,25 @@ namespace TekCift
         private void DosyayaYazdir(enİslem islemTuru, BigInteger toplamaSonuc, BigInteger carpmaSonuc, ListView sayilar)
         {
             string dosya_yolu = @"listviewLog.txt";
-            FileStream fsLog = new FileStream(dosya_yolu, FileMode.OpenOrCreate, FileAccess.Write);
-            using (StreamWriter sw = new StreamWriter(fsLog))
+            using (StreamWriter sw = new StreamWriter(dosya_yolu, true))
             {
-                if (File.Exists("listviewLog.txt"))
+                sw.WriteLine("***********************************");
+                DateTime simdi = DateTime.Now;
+                sw.WriteLine(simdi + " " + islemTuru + "\n");
+                sw.WriteLine("Sayılar: ");
+                for (int i = 1; i < sayilar.Items.Count; i++)
                 {
-                    StreamWriter SW = File.AppendText(Application.StartupPath + fsLog);
-                    sw.WriteLine("-------------------------------------");
-                    DateTime tarih = DateTime.Now;
-                    sw.WriteLine(tarih + " " + islemTuru + "\n");
-                    sw.WriteLine("Sayılar: ");
-                    for (int i = 1; i < sayilar.Items.Count; i++)
-                    {
-                        sw.WriteLine(sayilar.Items[i - 1].Text + ", ");
-                    }
-                    sw.WriteLine("\nToplama Sonucu: " + toplamaSonuc);
-                    sw.WriteLine("\nÇarpma Sonucu: " + carpmaSonuc);
-                    sw.WriteLine("-------------------------------------");
-                    SW.Close();
+                    sw.WriteLine(sayilar.Items[i - 1].Text + ", ");
                 }
-                else
-                {
-                    sw.WriteLine("-------------------------------------");
-                    DateTime simdi = DateTime.Now;
-                    sw.WriteLine(simdi + " " + islemTuru + "\n");
-                    sw.WriteLine("Sayılar: ");
-                    for (int i = 1; i < sayilar.Items.Count; i++)
-                    {
-                        sw.WriteLine(sayilar.Items[i - 1].Text + ", ");
-                    }
-                    sw.WriteLine("\nToplama Sonucu: " + toplamaSonuc);
-                    sw.WriteLine("\nÇarpma Sonucu: " + carpmaSonuc);
-                    sw.WriteLine("-------------------------------------");
-                }
-                
-                
+                sw.WriteLine("\nToplama Sonucu: " + toplamaSonuc);
+                sw.WriteLine("\nÇarpma Sonucu: " + carpmaSonuc);
+                sw.WriteLine("***********************************");
             }
+
         }
+        
 
        
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
-            notifyIcon.Icon = new Icon(@"C:\Users\Monster-Halil\Downloads\icon.ico");
-            notifyIcon.Visible = true;
-            notifyIcon.Text = "NotifyIcon Denemesi";
-            notifyIcon.BalloonTipTitle = "Program Çalışıyor";
-            notifyIcon.BalloonTipText = "Program sağ alt köşede konumlandı.";
-            notifyIcon.BalloonTipIcon = ToolTipIcon.Info;
-            notifyIcon.ShowBalloonTip(30000);
-            notifyIcon.MouseDoubleClick += new MouseEventHandler(MyIcon_MouseDoubleClick);
-        }
 
         private void Form1_Resize(object sender, EventArgs e)
         {
@@ -275,7 +246,6 @@ namespace TekCift
 
         private void btnHesapla_Click(object sender, EventArgs e)
         {
-
             int baslangic = Convert.ToInt32(msktxtBaslangic.Text);
             int bitis = Convert.ToInt32(msktxtBitis.Text);
             Islemler(tabIslemler.SelectedIndex, baslangic, bitis);
@@ -285,6 +255,15 @@ namespace TekCift
 
         private void Form1_Shown(object sender, EventArgs e)
         {
+            notifyIcon.Icon = new Icon(@"C:\Users\Monster-Halil\Downloads\icon.ico");
+            notifyIcon.Visible = true;
+            notifyIcon.Text = "NotifyIcon Denemesi";
+            notifyIcon.BalloonTipTitle = "Program Çalışıyor";
+            notifyIcon.BalloonTipText = "Program sağ alt köşede konumlandı.";
+            notifyIcon.BalloonTipIcon = ToolTipIcon.Info;
+            notifyIcon.ShowBalloonTip(30000);
+            notifyIcon.MouseDoubleClick += new MouseEventHandler(MyIcon_MouseDoubleClick);
+
             EkranHazirla();
             lstTekSayilar.View = View.Details;
             lstTekSayilar.GridLines = true;
@@ -361,5 +340,33 @@ namespace TekCift
         {
             ListSil(tabIslemler.SelectedIndex);
         }
+
+        void AcilacakSayfa()
+        {
+            String seciliTabAyari;
+            seciliTabAyari =System.Configuration.ConfigurationSettings.AppSettings["acilacak_sayfa"];
+            if (seciliTabAyari=="armstrong")
+            {
+                tabIslemler.SelectedIndex = 3;
+            }
+            else if (seciliTabAyari=="asal")
+            {
+                tabIslemler.SelectedIndex = 2;
+            }
+            else if (seciliTabAyari=="cift")
+            {
+                tabIslemler.SelectedIndex = 1;
+            }
+            else
+            {
+                tabIslemler.SelectedIndex = 0;
+            }
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            AcilacakSayfa();
+        }
+
     }
 }

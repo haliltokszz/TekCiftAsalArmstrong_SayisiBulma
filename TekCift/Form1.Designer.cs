@@ -60,6 +60,7 @@
             this.clmArmToplam = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.clmArmCarpim = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.notifyIcon = new System.Windows.Forms.NotifyIcon(this.components);
+            this.grpAcilacakSayfa = new System.Windows.Forms.GroupBox();
             this.grpGirisBilgileri.SuspendLayout();
             this.tabIslemler.SuspendLayout();
             this.tbpgTekSayilar.SuspendLayout();
@@ -332,15 +333,26 @@
             this.notifyIcon.Text = "NotifyIcon";
             this.notifyIcon.Visible = true;
             // 
+            // grpAcilacakSayfa
+            // 
+            this.grpAcilacakSayfa.Location = new System.Drawing.Point(12, 449);
+            this.grpAcilacakSayfa.Name = "grpAcilacakSayfa";
+            this.grpAcilacakSayfa.Size = new System.Drawing.Size(575, 50);
+            this.grpAcilacakSayfa.TabIndex = 7;
+            this.grpAcilacakSayfa.TabStop = false;
+            this.grpAcilacakSayfa.Text = "Açılacak Sayfa";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(603, 451);
+            this.ClientSize = new System.Drawing.Size(603, 511);
+            this.Controls.Add(this.grpAcilacakSayfa);
             this.Controls.Add(this.tabIslemler);
             this.Controls.Add(this.grpGirisBilgileri);
             this.Name = "Form1";
             this.Text = "Form1";
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.Shown += new System.EventHandler(this.Form1_Shown);
             this.grpGirisBilgileri.ResumeLayout(false);
             this.grpGirisBilgileri.PerformLayout();
@@ -386,6 +398,7 @@
         private System.Windows.Forms.MaskedTextBox msktxtBaslangic;
         private System.Windows.Forms.MaskedTextBox msktxtBitis;
         private System.Windows.Forms.NotifyIcon notifyIcon;
+        private System.Windows.Forms.GroupBox grpAcilacakSayfa;
     }
 }
 
