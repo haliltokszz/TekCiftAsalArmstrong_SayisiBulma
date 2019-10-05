@@ -60,6 +60,7 @@
             this.clmArmToplam = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.clmArmCarpim = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.notifyIcon = new System.Windows.Forms.NotifyIcon(this.components);
+            this.btnListTemizle = new System.Windows.Forms.Button();
             this.grpGirisBilgileri.SuspendLayout();
             this.tabIslemler.SuspendLayout();
             this.tbpgTekSayilar.SuspendLayout();
@@ -80,6 +81,7 @@
             // 
             // grpGirisBilgileri
             // 
+            this.grpGirisBilgileri.Controls.Add(this.btnListTemizle);
             this.grpGirisBilgileri.Controls.Add(this.msktxtBitis);
             this.grpGirisBilgileri.Controls.Add(this.msktxtBaslangic);
             this.grpGirisBilgileri.Controls.Add(this.btnSil);
@@ -90,7 +92,7 @@
             this.grpGirisBilgileri.Controls.Add(this.lblBaslangicSayi);
             this.grpGirisBilgileri.Location = new System.Drawing.Point(12, 12);
             this.grpGirisBilgileri.Name = "grpGirisBilgileri";
-            this.grpGirisBilgileri.Size = new System.Drawing.Size(579, 119);
+            this.grpGirisBilgileri.Size = new System.Drawing.Size(713, 119);
             this.grpGirisBilgileri.TabIndex = 1;
             this.grpGirisBilgileri.TabStop = false;
             this.grpGirisBilgileri.Text = "Giriş Bilgileri";
@@ -115,17 +117,17 @@
             // 
             // btnSil
             // 
-            this.btnSil.Location = new System.Drawing.Point(450, 60);
+            this.btnSil.Location = new System.Drawing.Point(571, 66);
             this.btnSil.Name = "btnSil";
-            this.btnSil.Size = new System.Drawing.Size(86, 28);
+            this.btnSil.Size = new System.Drawing.Size(118, 47);
             this.btnSil.TabIndex = 6;
-            this.btnSil.Text = "Sil";
+            this.btnSil.Text = "Seçili Satırı Sil";
             this.btnSil.UseVisualStyleBackColor = true;
             this.btnSil.Click += new System.EventHandler(this.btnSil_Click);
             // 
             // btnİleri
             // 
-            this.btnİleri.Location = new System.Drawing.Point(496, 21);
+            this.btnİleri.Location = new System.Drawing.Point(500, 60);
             this.btnİleri.Name = "btnİleri";
             this.btnİleri.Size = new System.Drawing.Size(40, 27);
             this.btnİleri.TabIndex = 5;
@@ -135,7 +137,7 @@
             // 
             // btnGeri
             // 
-            this.btnGeri.Location = new System.Drawing.Point(450, 21);
+            this.btnGeri.Location = new System.Drawing.Point(438, 60);
             this.btnGeri.Name = "btnGeri";
             this.btnGeri.Size = new System.Drawing.Size(40, 27);
             this.btnGeri.TabIndex = 4;
@@ -170,7 +172,7 @@
             this.tabIslemler.Location = new System.Drawing.Point(12, 137);
             this.tabIslemler.Name = "tabIslemler";
             this.tabIslemler.SelectedIndex = 0;
-            this.tabIslemler.Size = new System.Drawing.Size(579, 302);
+            this.tabIslemler.Size = new System.Drawing.Size(713, 302);
             this.tabIslemler.TabIndex = 6;
             // 
             // tbpgTekSayilar
@@ -179,7 +181,7 @@
             this.tbpgTekSayilar.Location = new System.Drawing.Point(4, 25);
             this.tbpgTekSayilar.Name = "tbpgTekSayilar";
             this.tbpgTekSayilar.Padding = new System.Windows.Forms.Padding(3);
-            this.tbpgTekSayilar.Size = new System.Drawing.Size(571, 273);
+            this.tbpgTekSayilar.Size = new System.Drawing.Size(705, 273);
             this.tbpgTekSayilar.TabIndex = 0;
             this.tbpgTekSayilar.Text = "Tek Sayılar";
             this.tbpgTekSayilar.UseVisualStyleBackColor = true;
@@ -193,7 +195,7 @@
             this.lstTekSayilar.HideSelection = false;
             this.lstTekSayilar.Location = new System.Drawing.Point(-4, 0);
             this.lstTekSayilar.Name = "lstTekSayilar";
-            this.lstTekSayilar.Size = new System.Drawing.Size(575, 277);
+            this.lstTekSayilar.Size = new System.Drawing.Size(713, 277);
             this.lstTekSayilar.TabIndex = 0;
             this.lstTekSayilar.UseCompatibleStateImageBehavior = false;
             // 
@@ -204,13 +206,13 @@
             // 
             // clmTekToplam
             // 
-            this.clmTekToplam.Text = "Toplam";
-            this.clmTekToplam.Width = 150;
+            this.clmTekToplam.Text = "Toplam(Sonuç En Aşağıdadır)";
+            this.clmTekToplam.Width = 225;
             // 
             // clmTekCarpim
             // 
-            this.clmTekCarpim.Text = "Çarpım";
-            this.clmTekCarpim.Width = 150;
+            this.clmTekCarpim.Text = "Çarpım(Sonuç En Aşağıdadır)";
+            this.clmTekCarpim.Width = 225;
             // 
             // tbpgCiftSayilar
             // 
@@ -218,7 +220,7 @@
             this.tbpgCiftSayilar.Location = new System.Drawing.Point(4, 25);
             this.tbpgCiftSayilar.Name = "tbpgCiftSayilar";
             this.tbpgCiftSayilar.Padding = new System.Windows.Forms.Padding(3);
-            this.tbpgCiftSayilar.Size = new System.Drawing.Size(571, 273);
+            this.tbpgCiftSayilar.Size = new System.Drawing.Size(705, 273);
             this.tbpgCiftSayilar.TabIndex = 1;
             this.tbpgCiftSayilar.Text = "Çift Sayılar";
             this.tbpgCiftSayilar.UseVisualStyleBackColor = true;
@@ -232,7 +234,7 @@
             this.lstCiftSayilar.HideSelection = false;
             this.lstCiftSayilar.Location = new System.Drawing.Point(-4, -2);
             this.lstCiftSayilar.Name = "lstCiftSayilar";
-            this.lstCiftSayilar.Size = new System.Drawing.Size(579, 277);
+            this.lstCiftSayilar.Size = new System.Drawing.Size(713, 277);
             this.lstCiftSayilar.TabIndex = 1;
             this.lstCiftSayilar.UseCompatibleStateImageBehavior = false;
             // 
@@ -243,20 +245,20 @@
             // 
             // clmCiftToplam
             // 
-            this.clmCiftToplam.Text = "Toplam";
-            this.clmCiftToplam.Width = 150;
+            this.clmCiftToplam.Text = "Toplam(Sonuç En Aşağıdadır)";
+            this.clmCiftToplam.Width = 225;
             // 
             // clmCiftCarpim
             // 
-            this.clmCiftCarpim.Text = "Çarpım";
-            this.clmCiftCarpim.Width = 150;
+            this.clmCiftCarpim.Text = "Çarpım(Sonuç En Aşağıdadır)";
+            this.clmCiftCarpim.Width = 225;
             // 
             // tbpgAsalSayilar
             // 
             this.tbpgAsalSayilar.Controls.Add(this.lstAsalSayilar);
             this.tbpgAsalSayilar.Location = new System.Drawing.Point(4, 25);
             this.tbpgAsalSayilar.Name = "tbpgAsalSayilar";
-            this.tbpgAsalSayilar.Size = new System.Drawing.Size(571, 273);
+            this.tbpgAsalSayilar.Size = new System.Drawing.Size(705, 273);
             this.tbpgAsalSayilar.TabIndex = 2;
             this.tbpgAsalSayilar.Text = "Asal Sayılar";
             this.tbpgAsalSayilar.UseVisualStyleBackColor = true;
@@ -270,7 +272,7 @@
             this.lstAsalSayilar.HideSelection = false;
             this.lstAsalSayilar.Location = new System.Drawing.Point(-4, -2);
             this.lstAsalSayilar.Name = "lstAsalSayilar";
-            this.lstAsalSayilar.Size = new System.Drawing.Size(579, 277);
+            this.lstAsalSayilar.Size = new System.Drawing.Size(713, 277);
             this.lstAsalSayilar.TabIndex = 1;
             this.lstAsalSayilar.UseCompatibleStateImageBehavior = false;
             // 
@@ -282,19 +284,19 @@
             // clmAsalToplam
             // 
             this.clmAsalToplam.Text = "Toplam";
-            this.clmAsalToplam.Width = 150;
+            this.clmAsalToplam.Width = 225;
             // 
             // clmAsalCarpim
             // 
             this.clmAsalCarpim.Text = "Çarpım";
-            this.clmAsalCarpim.Width = 150;
+            this.clmAsalCarpim.Width = 225;
             // 
             // tbpgArmstrongSayilar
             // 
             this.tbpgArmstrongSayilar.Controls.Add(this.lstArmstrongSayilar);
             this.tbpgArmstrongSayilar.Location = new System.Drawing.Point(4, 25);
             this.tbpgArmstrongSayilar.Name = "tbpgArmstrongSayilar";
-            this.tbpgArmstrongSayilar.Size = new System.Drawing.Size(571, 273);
+            this.tbpgArmstrongSayilar.Size = new System.Drawing.Size(705, 273);
             this.tbpgArmstrongSayilar.TabIndex = 3;
             this.tbpgArmstrongSayilar.Text = "Armstrong Sayılar";
             this.tbpgArmstrongSayilar.UseVisualStyleBackColor = true;
@@ -306,9 +308,9 @@
             this.clmArmToplam,
             this.clmArmCarpim});
             this.lstArmstrongSayilar.HideSelection = false;
-            this.lstArmstrongSayilar.Location = new System.Drawing.Point(-4, 3);
+            this.lstArmstrongSayilar.Location = new System.Drawing.Point(-4, 0);
             this.lstArmstrongSayilar.Name = "lstArmstrongSayilar";
-            this.lstArmstrongSayilar.Size = new System.Drawing.Size(579, 277);
+            this.lstArmstrongSayilar.Size = new System.Drawing.Size(709, 280);
             this.lstArmstrongSayilar.TabIndex = 1;
             this.lstArmstrongSayilar.UseCompatibleStateImageBehavior = false;
             // 
@@ -320,23 +322,33 @@
             // clmArmToplam
             // 
             this.clmArmToplam.Text = "Toplam";
-            this.clmArmToplam.Width = 150;
+            this.clmArmToplam.Width = 225;
             // 
             // clmArmCarpim
             // 
             this.clmArmCarpim.Text = "Çarpım";
-            this.clmArmCarpim.Width = 150;
+            this.clmArmCarpim.Width = 225;
             // 
             // notifyIcon
             // 
             this.notifyIcon.Text = "NotifyIcon";
             this.notifyIcon.Visible = true;
             // 
+            // btnListTemizle
+            // 
+            this.btnListTemizle.Location = new System.Drawing.Point(571, 12);
+            this.btnListTemizle.Name = "btnListTemizle";
+            this.btnListTemizle.Size = new System.Drawing.Size(118, 45);
+            this.btnListTemizle.TabIndex = 8;
+            this.btnListTemizle.Text = "ListView Temizle";
+            this.btnListTemizle.UseVisualStyleBackColor = true;
+            this.btnListTemizle.Click += new System.EventHandler(this.btnListTemizle_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(603, 450);
+            this.ClientSize = new System.Drawing.Size(737, 450);
             this.Controls.Add(this.tabIslemler);
             this.Controls.Add(this.grpGirisBilgileri);
             this.Name = "Form1";
@@ -387,6 +399,7 @@
         private System.Windows.Forms.MaskedTextBox msktxtBaslangic;
         private System.Windows.Forms.MaskedTextBox msktxtBitis;
         private System.Windows.Forms.NotifyIcon notifyIcon;
+        private System.Windows.Forms.Button btnListTemizle;
     }
 }
 

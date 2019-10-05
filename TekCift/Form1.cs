@@ -70,6 +70,10 @@ namespace TekCift
             bool asallikKontrol= false;
             for (int degerlendirilecekSayi = sayi1; degerlendirilecekSayi < sayi2; degerlendirilecekSayi++)
             {
+                if (degerlendirilecekSayi == 2)
+                {
+                    asallikKontrol = true;
+                }
                 for (int sayac = 2; sayac < degerlendirilecekSayi; sayac++)
                 {
                     if (degerlendirilecekSayi % sayac == 0)
@@ -377,5 +381,21 @@ namespace TekCift
             AcilacakSayfa();
         }
 
+        private void btnListTemizle_Click(object sender, EventArgs e)
+        {
+            if (tabIslemler.SelectedIndex == 0)
+            {
+                lstTekSayilar.Items.Clear();
+            }else if (tabIslemler.SelectedIndex == 1)
+            {
+                lstCiftSayilar.Items.Clear();
+            }else if (tabIslemler.SelectedIndex == 2)
+            {
+                lstAsalSayilar.Items.Clear();
+            }else if (tabIslemler.SelectedIndex == 3)
+            {
+                lstArmstrongSayilar.Items.Clear();
+            }
+        }
     }
 }
