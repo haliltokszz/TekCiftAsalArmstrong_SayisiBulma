@@ -16,7 +16,7 @@ namespace TekCift
 {
     public partial class Form1 : Form
     {
-        public object ConfigurationSaveMode { get; private set; }
+        
 
         public Form1()
         {
@@ -111,12 +111,12 @@ namespace TekCift
             return armstrongSayilar;
         }
 
-        int Toplama(ArrayList sayilar)
+        ulong Toplama(ArrayList sayilar)
         {
-            int toplam=0;
+            ulong toplam=0;
             foreach(int z in sayilar)
             {
-                toplam += z;
+                toplam += Convert.ToUInt64(z);
             }
             return toplam;
         }
@@ -130,30 +130,34 @@ namespace TekCift
             return carpim;
         }
 
-        void LogYaz(enİslem islemTuru ,int toplam, BigInteger carpim, ArrayList sayiListe)
+        void LogYaz(enİslem islemTuru ,ulong toplam, BigInteger carpim, ArrayList sayiListe)
         {
             if (islemTuru == enİslem.eTekSayi)
-            { 
+            {
+                ListViewItem liste;
                 foreach (int sayi in sayiListe)
                 {
-                    ListViewItem liste;
-                    string[] degerler = new string[3];
-                    degerler[0] = sayi.ToString(); degerler[1] = toplam.ToString(); degerler[2] = carpim.ToString();
-                    liste = new ListViewItem(degerler);
+                    liste = new ListViewItem(sayi.ToString());
                     lstTekSayilar.Items.Add(liste);
                 }
+                string[] degerler = new string[3];
+                degerler[0] = "Toplam ve Çarpım Sonucu"; degerler[1] = toplam.ToString(); degerler[2] = carpim.ToString();
+                liste = new ListViewItem(degerler);
+                lstTekSayilar.Items.Add(liste);
 
             }
             else if (islemTuru == enİslem.eCiftSayi)
             {
+                ListViewItem liste;
                 foreach (int sayi in sayiListe)
                 {
-                    ListViewItem liste;
-                    string[] degerler = new string[3];
-                    degerler[0] = sayi.ToString(); degerler[1] = toplam.ToString(); degerler[2] = carpim.ToString();
-                    liste = new ListViewItem(degerler);
+                    liste = new ListViewItem(sayi.ToString());
                     lstCiftSayilar.Items.Add(liste);
                 }
+                string[] degerler = new string[3];
+                degerler[0] = "Toplam ve Çarpım Sonucu"; degerler[1] = toplam.ToString(); degerler[2] = carpim.ToString();
+                liste = new ListViewItem(degerler);
+                lstCiftSayilar.Items.Add(liste);
             }
             else if (islemTuru == enİslem.eAsalSayi) { 
                 foreach (int sayi in sayiListe)
@@ -179,25 +183,33 @@ namespace TekCift
 
         void Islemler(int eTur, int ilkSayi, int sonSayi)
         {
+            ulong tekToplam = Toplama(TekSayiBul(ilkSayi, sonSayi));
+            BigInteger tekCarpim = Carpma(TekSayiBul(ilkSayi, sonSayi));
+            ulong ciftToplam = Toplama(CiftSayiBul(ilkSayi, sonSayi));
+            BigInteger ciftCarpim = Carpma(CiftSayiBul(ilkSayi, sonSayi));
+            ulong asalToplam = Toplama(AsalSayiBul(ilkSayi, sonSayi));
+            BigInteger asalCarpim = Carpma(AsalSayiBul(ilkSayi, sonSayi));
+            ulong armToplam = Toplama(ArmstrongSayiBul(ilkSayi, sonSayi));
+            BigInteger armCarpim = Carpma(ArmstrongSayiBul(ilkSayi, sonSayi));
             if (eTur == (int)enİslem.eTekSayi)
             {
-                LogYaz(enİslem.eTekSayi, Toplama(TekSayiBul(ilkSayi, sonSayi)), Carpma(TekSayiBul(ilkSayi, sonSayi)), TekSayiBul(ilkSayi, sonSayi));
-                DosyayaYazdir(enİslem.eTekSayi, Toplama(TekSayiBul(ilkSayi, sonSayi)), Carpma(TekSayiBul(ilkSayi, sonSayi)), lstTekSayilar);
+                LogYaz(enİslem.eTekSayi, tekToplam, tekCarpim, TekSayiBul(ilkSayi, sonSayi));
+                DosyayaYazdir(enİslem.eTekSayi, tekToplam, tekCarpim, lstTekSayilar);
             }
             else if (eTur == (int)enİslem.eCiftSayi)
             {
-                LogYaz(enİslem.eCiftSayi, Toplama(CiftSayiBul(ilkSayi, sonSayi)), Carpma(CiftSayiBul(ilkSayi, sonSayi)), CiftSayiBul(ilkSayi, sonSayi));
-                DosyayaYazdir(enİslem.eCiftSayi, Toplama(CiftSayiBul(ilkSayi, sonSayi)), Carpma(CiftSayiBul(ilkSayi, sonSayi)), lstCiftSayilar);
+                LogYaz(enİslem.eCiftSayi, ciftToplam, ciftCarpim, CiftSayiBul(ilkSayi, sonSayi));
+                DosyayaYazdir(enİslem.eCiftSayi, ciftToplam, ciftCarpim, lstCiftSayilar);
             }
             else if (eTur == (int)enİslem.eAsalSayi)
             {
-                LogYaz(enİslem.eAsalSayi, Toplama(AsalSayiBul(ilkSayi, sonSayi)), Carpma(AsalSayiBul(ilkSayi, sonSayi)), AsalSayiBul(ilkSayi, sonSayi));
-                DosyayaYazdir(enİslem.eAsalSayi, Toplama(AsalSayiBul(ilkSayi, sonSayi)), Carpma(AsalSayiBul(ilkSayi, sonSayi)), lstAsalSayilar);
+                LogYaz(enİslem.eAsalSayi, asalToplam, asalCarpim, AsalSayiBul(ilkSayi, sonSayi));
+                DosyayaYazdir(enİslem.eAsalSayi, asalToplam, asalCarpim, lstAsalSayilar);
             }
             else if (eTur == (int)enİslem.eArmstrongSayi)
             {
-                LogYaz(enİslem.eArmstrongSayi, Toplama(ArmstrongSayiBul(ilkSayi, sonSayi)), Carpma(ArmstrongSayiBul(ilkSayi, sonSayi)), ArmstrongSayiBul(ilkSayi, sonSayi));
-                DosyayaYazdir(enİslem.eArmstrongSayi, Toplama(ArmstrongSayiBul(ilkSayi, sonSayi)), Carpma(ArmstrongSayiBul(ilkSayi, sonSayi)), lstArmstrongSayilar);
+                LogYaz(enİslem.eArmstrongSayi, armToplam, armCarpim, ArmstrongSayiBul(ilkSayi, sonSayi));
+                DosyayaYazdir(enİslem.eArmstrongSayi, armToplam, armCarpim, lstArmstrongSayilar);
             }
         }
         private void DosyayaYazdir(enİslem islemTuru, BigInteger toplamaSonuc, BigInteger carpmaSonuc, ListView sayilar)
@@ -219,9 +231,6 @@ namespace TekCift
             }
 
         }
-        
-
-       
 
         private void Form1_Resize(object sender, EventArgs e)
         {
